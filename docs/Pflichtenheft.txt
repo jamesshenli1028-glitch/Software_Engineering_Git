@@ -1,0 +1,34 @@
+Funktion 1: Manuelle Startfunktion
+  - Die Start- und Stoptasten sind mit einer Hardware-Entprellschaltung ausgestattet.
+  - Beim Einschalten führt das System einen Initialisierungs-Check durch, der den Zustand aller kritischen Komponenten (z.B. Abdeckungssensor, Temperatursensor) prüft.
+  - Die Steuerungssoftware implementiert eine Zustandsmaschine. Ein Startsignal wird nur im Zustand "Bereit" akzeptiert und im Zustand "In Betrieb" ignoriert.
+
+
+Funktion 2: Vakuumierprozess-Überwachung
+  - Ein Drucksensor wird benutzt, den innere Druck zu überwachen, dabei muss DMA ständig die Daten übertragen.
+  - Bei Erreichen des Soll-Drucks (100 mbar) wird die Softwarefunktion VStop() aufgerufen.
+  - Anschließend setzt die Steuerung ein Steuersignal, das direkt den Versiegelungsprozess startet.
+
+
+Funktion 3: Versiegelungsprozess-Steuerung 
+  - Ein Hardware-Timer des Mikrocontrollers steuert die Aktivierungsdauer des Heizelements.
+  - Das Heizelement wird für eine fest programmierte Zeit (z.B. 2,0 Sekunden) über einen Leistungs-MOSFET eingeschaltet.
+  - Derselbe Timer überwacht die maximale Prozesszeit. Bei einer Zeitüberschreitung wird die Funktion Safety_Alarm() aufgerufen.
+  - Die Zeitgeber-Schaltung gewährleistet eine Zeitgenauigkeit von besser als ±50 ms.
+
+
+Funktion 4: Sicherheitsabschaltung
+  - Ein NTC-Temperatursensor liefert analoge Werte an den ADC des Mikrocontrollers. Bei Überschreitung von 80 °C wird Safety_Shutdown() ausgelöst.
+  - Wenn die Bedeckung Fehler durch Hardware Schaltung erkannt wird, die Shutdown() wird aufgerufen, nebenbei wird die Störungslicht aktiviert.
+  - Ein Stromsensor überwacht den Stromverbrauch des Motors. Ein plötzlicher starker Anstieg deutet auf eine Blockade hin. 
+  - Der Mikrocontroller erkennt dies und schaltet die Motorleistungsstufe sofort ab. Zusätzlich kann ein Hardware-Interrupt für eine schnellste Reaktion sorgen. 
+  - Bei jeder Abschaltung aktiviert der Mikrocontroller eine rote LED und einen Piezo-Lautsprecher
+
+
+Funktion 5: Benutzerfeedback
+  - Grünlicht beim normalen Zustand.
+  - Rotlicht beim blockierenden Zustand.
+  - Gelblicht beim anderen Zustand.
+  - Ein Summer gibt im Fehlerfall einen akustischen Alarm aus.
+  - Zur Verstärkung des Signals kommt eine einfache Transistor-Verstärkerschaltung zum Einsatz.
+  - Der Schalldruckpegel muss am Gerät mindestens 70 dB betragen.
