@@ -1,4 +1,11 @@
 Funktion 1: Manuelle Startfunktion
+Funktion 2: Vakuumierprozess-Überwachung
+Funktion 3: Versiegelungsprozess-Steuerung
+Funktion 4: Sicherheitsabschaltung
+Funktion 5: Benutzerfeedback
+
+
+Funktion 1: Manuelle Startfunktion
   - Die Start- und Stoptasten sind mit einer Hardware-Entprellschaltung ausgestattet.
   - Beim Einschalten führt das System einen Initialisierungs-Check durch, der den Zustand aller kritischen Komponenten (z.B. Abdeckungssensor, Temperatursensor) prüft.
   - Die Steuerungssoftware implementiert eine Zustandsmaschine. Ein Startsignal wird nur im Zustand "Bereit" akzeptiert und im Zustand "In Betrieb" ignoriert.
