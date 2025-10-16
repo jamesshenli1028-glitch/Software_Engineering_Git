@@ -1,3 +1,10 @@
+Funktion 1: Manuelle Startfunktion
+Funktion 2: Vakuumierprozess-Überwachung
+Funktion 3: Versiegelungsprozess-Steuerung
+Funktion 4: Sicherheitsabschaltung
+Funktion 5: Benutzerfeedback
+
+
 Funktionale Anfoderung:
 
 F-START-1: Das System muss nach Betätigung der Starttaste den Arbeitszyklus starten.
