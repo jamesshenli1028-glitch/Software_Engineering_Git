@@ -7,33 +7,33 @@ Funktion 5: Benutzerfeedback
 
 Funktionale Anfoderung:
 
-F-START-1: Das System muss nach Betätigung der Starttaste den Arbeitszyklus starten.
-F-START-2: Das System muss nach Betätigung der Stoptaste sofort anhalten.
-F-START-3: Das System muss vor dem Start die Betriebsbereitschaft aller kritischen Komponenten sicherstellen.
+**F-START-1**: Das System muss nach Betätigung der Starttaste den Arbeitszyklus starten.
+**F-START-2**: Das System muss nach Betätigung der Stoptaste sofort anhalten.
+**F-START-3**: Das System muss vor dem Start die Betriebsbereitschaft aller kritischen Komponenten sicherstellen.
 
-F-VAKUUM-1: Das System muss den Druck in der Vakuumkammer kontinuierlich überwachen.
-F-VAKUUM-2: Das System muss den Vakuumierprozess automatisch beenden, wenn ein vordefinierter Zieldruck (100 mbar) erreicht ist.
-F-VAKUUM-3: Das System muss nach Beendigung des Vakuumierprozesses automatisch mit dem Versiegelungsprozess beginnen.
+**F-VAKUUM-1**: Das System muss den Druck in der Vakuumkammer kontinuierlich überwachen.
+**F-VAKUUM-2**: Das System muss den Vakuumierprozess automatisch beenden, wenn ein vordefinierter Zieldruck (100 mbar) erreicht ist.
+**F-VAKUUM-3**: Das System muss nach Beendigung des Vakuumierprozesses automatisch mit dem Versiegelungsprozess beginnen.
 
-F-VERSIEGELUNG-1: Das System muss den Beutel nach erfolgreichem Vakuumieren vollautomatisch versiegeln.
-F-VERSIEGELUNG-2: Die Versiegelungszeit muss präzise gesteuert werden.
+**F-VERSIEGELUNG-1**: Das System muss den Beutel nach erfolgreichem Vakuumieren vollautomatisch versiegeln.
+**F-VERSIEGELUNG-2**: Die Versiegelungszeit muss präzise gesteuert werden.
 
-F-SICHERHEITABSCHALTUNG-1: Das System muss bei Überschreiten der Maximaltemperatur (80 °C) automatisch abschalten.
-F-SICHERHEITABSCHALTUNG-2: Das System muss bei geöffneter Abdeckung während des Betriebs sofort anhalten.
-F-SICHERHEITABSCHALTUNG-3: Das System muss bei Erkennen einer Motorblockade sofort abschalten.
-F-SICHERHEITABSCHALTUNG-4: Im Störfall muss das System eine unübersehbare visuelle und akustische Warnung ausgeben.
+**F-SICHERHEITABSCHALTUNG-1**: Das System muss bei Überschreiten der Maximaltemperatur (80 °C) automatisch abschalten.
+**F-SICHERHEITABSCHALTUNG-2**: Das System muss bei geöffneter Abdeckung während des Betriebs sofort anhalten.
+**F-SICHERHEITABSCHALTUNG-3**: Das System muss bei Erkennen einer Motorblockade sofort abschalten.
+**F-SICHERHEITABSCHALTUNG-4**: Im Störfall muss das System eine unübersehbare visuelle und akustische Warnung ausgeben.
 
-F-BENUTZERFEEDBACK-1: Das System muss für die Betriebszustände (Bereit, In Betrieb, Fehler) eindeutige und unterscheidbare Signale bereitstellen.
-F-BENUTZERFEEDBACK-2: Die visuelle Anzeige muss aus 5 Metern Entfernung klar erkennbar sein.
+**F-BENUTZERFEEDBACK-1**: Das System muss für die Betriebszustände (Bereit, In Betrieb, Fehler) eindeutige und unterscheidbare Signale bereitstellen.
+**F-BENUTZERFEEDBACK-2**: Die visuelle Anzeige muss aus 5 Metern Entfernung klar erkennbar sein.
 
 
 
 Nicht-funktionale Anforderungen：
 
-NF-ZEIT-1: Die Reaktionszeit auf eine kritische Störung muss < 200 ms betragen.
-NF-ZEIT-2: Die Genauigkeit der Zeitsteuerung beim Versiegelungsprozess muss besser als ±50 ms sein.
+**NF-ZEIT-1**: Die Reaktionszeit auf eine kritische Störung muss < 200 ms betragen.
+**NF-ZEIT-2**: Die Genauigkeit der Zeitsteuerung beim Versiegelungsprozess muss besser als ±50 ms sein.
 
-NF-BENUTZERFEEDBACK -1: Der akustische Alarm muss eine Lautstärke von mindestens 70 dB aufweisen.
+**NF-BENUTZERFEEDBACK-1**: Der akustische Alarm muss eine Lautstärke von mindestens 70 dB aufweisen.
 
-NF-LEISTUNG-1: Das System muss auch bei Spannungsschwankungen zuverlässig funktionieren.
+**NF-LEISTUNG-1**: Das System muss auch bei Spannungsschwankungen zuverlässig funktionieren.
 
