@@ -1,0 +1,63 @@
+Komponente: Prozess-Koordinator(System Manager)	
+Rolle: Prozesslogik	
+Konkrete Verantwortlichkeiten
+- Verwaltet die Haupt-Zustandsmaschine des Systems.
+- Koordiniert die Sequenz: Selbsttest → Vakuum → Versiegelung.
+- Verarbeitet Start- und Stop-Befehle.
+- Initiiert und überwacht den 2-Sekunden-Selbsttest aller kritischer Komponenten.
+
+Komponente: Vakuum-Regler(Vacuum Manager)	
+Rolle: Regelungslogik	
+Konkrete Verantwortlichkeiten：
+- Steuert den Vakuumierprozess.
+- Überwacht den Kammerdruck mit 10 Hz Abtastrate.
+- Beendet den Prozess automatisch bei Erreichen des Zieldrucks (100 mbar ±5 mbar).
+- Signalisiert Prozessende an den Prozess-Koordinator.
+
+Komponente: Versiegelungs-Ablauf(Sealing Manager)	
+Rolle: Ablaufsteuerung	
+Konkrete Verantwortlichkeiten:
+- Steuert den Versiegelungsprozess.
+- Startet automatisch innerhalb von 200 ms nach Vakuum-Ende.
+- Gewährleistet die präzise Versiegelungszeit von 2,0 s ±50 ms.
+- Steuert das Heizelement über den MOSFET.
+
+Komponente: Sicherheits-Wächter(Safety Monitor)	
+Rolle: Sicherheitslogik	
+Konkrete Verantwortlichkeiten:
+- Überwacht kontinuierlich Temperatur (≥80 °C), Abdeckung und Motorstrom.
+- Erkennt kritische Zustände und löst Abschaltung innerhalb von 200 ms aus.
+- Meldet Fehlerzustände an den Prozess-Koordinator und Anzeige-Controller.
+
+Komponente: Anzeige-Controller(UI Manager)	
+Rolle: Benutzerschnittstelle	
+Konkrete Verantwortlichkeiten:
+- Steuert die Status-LEDs (Grün, Gelb, Rot, 2 Hz Blinken).
+- Steuert den Summer für akustische Alarme (≥70 dB, ≥5 s Dauer).
+- Stellt sicher, dass die Anzeige aus 5 m Entfernung klar erkennbar ist.
+
+Komponente: Druck-Messkette(Pressure Service)	
+Rolle: Messdatenerfassung	
+Konkrete Verantwortlichkeiten:
+- Erfasst Rohdaten des Drucksensors.
+- Liefert kalibrierte Druckwerte in mbar.
+- Nutzt DMA für effiziente Datenübertragung mit 10 Hz.
+
+Komponente: Temperatur-Erfasser(Temperature Service)	
+Rolle: Messdatenerfassung	
+Konkrete Verantwortlichkeiten:
+- Erfasst Rohdaten des NTC-Sensors.
+- Liefert kalibrierte Temperaturwerte in °C mit ±2 °C Genauigkeit.
+
+Komponente: Antriebs-Ansteuerung(Motor Service)	
+Rolle: Aktorik	
+Konkrete Verantwortlichkeiten:
+- Schaltet die Vakuumpumpe ein und aus.
+- Schaltet das Heizelement für die Versiegelung ein und aus.
+- Überwacht den Motorstrom zur Blockade-Erkennung.
+
+Komponente: Zeitgeber-Basis(Timer Service)	
+Rolle: Zeitbasis	
+Konkrete Verantwortlichkeiten:
+- Stellt eine präzise Zeitbasis für den Versiegelungsprozess bereit (±50 ms).
+- Generiert die 2 Hz Blinkfrequenz für die Status-LED.
