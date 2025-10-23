@@ -1,39 +1,37 @@
-Funktion 1: Manuelle Startfunktion
-Funktion 2: Vakuumierprozess-Überwachung
-Funktion 3: Versiegelungsprozess-Steuerung
-Funktion 4: Sicherheitsabschaltung
-Funktion 5: Benutzerfeedback
-
-
 Funktionale Anfoderung:
 
+Funktion 1: Manuelle Startfunktion
 **F-START-1**: Das System muss nach Betätigung der Starttaste den Arbeitszyklus starten.
-**F-START-2**: Das System muss nach Betätigung der Stoptaste sofort anhalten.
-**F-START-3**: Das System muss vor dem Start die Betriebsbereitschaft aller kritischen Komponenten sicherstellen.
+**F-START-2**: Das System muss nach Betätigung der Stoptaste innerhalb von 100 ms anhalten.
+**F-START-3**: Vor dem Start muss das System alle kritischen Komponenten (Abdeckungssensor, Temperatursensor, Motorstatus) überprüfen und den Status innerhalb von max. 2 Sekunden melden..
 
-**F-VAKUUM-1**: Das System muss den Druck in der Vakuumkammer kontinuierlich überwachen.
-**F-VAKUUM-2**: Das System muss den Vakuumierprozess automatisch beenden, wenn ein vordefinierter Zieldruck (100 mbar) erreicht ist.
-**F-VAKUUM-3**: Das System muss nach Beendigung des Vakuumierprozesses automatisch mit dem Versiegelungsprozess beginnen.
+Funktion 2: Vakuumierprozess-Überwachung
+**F-VAKUUM-1**: Das System muss den Druck in der Vakuumkammer mit einer Abtastrate von 10 Hz überwachen.
+**F-VAKUUM-2**: Das System muss den Vakuumierprozess automatisch beenden, wenn ein vordefinierter Zieldruck (100 mbar ± 5 mbar) erreicht ist.
+**F-VAKUUM-3**: Das System muss innerhalb von 200 ms nach Beendigung des Vakuumierprozesses automatisch mit dem Versiegelungsprozess beginnen.
 
+Funktion 3: Versiegelungsprozess-Steuerung
 **F-VERSIEGELUNG-1**: Das System muss den Beutel nach erfolgreichem Vakuumieren vollautomatisch versiegeln.
-**F-VERSIEGELUNG-2**: Die Versiegelungszeit muss präzise gesteuert werden.
+**F-VERSIEGELUNG-2**: Die Versiegelungszeit muss auf 2,0 Sekunden ± 50 ms genau eingehalten werden.
 
-**F-SICHERHEITABSCHALTUNG-1**: Das System muss bei Überschreiten der Maximaltemperatur (80 °C) automatisch abschalten.
-**F-SICHERHEITABSCHALTUNG-2**: Das System muss bei geöffneter Abdeckung während des Betriebs sofort anhalten.
-**F-SICHERHEITABSCHALTUNG-3**: Das System muss bei Erkennen einer Motorblockade sofort abschalten.
-**F-SICHERHEITABSCHALTUNG-4**: Im Störfall muss das System eine unübersehbare visuelle und akustische Warnung ausgeben.
+Funktion 4: Sicherheitsabschaltung
+**F-SICHERHEITABSCHALTUNG-1**: Das System muss bei Überschreiten der Maximaltemperatur (80 °C) automatisch abschalten. Die Temperaturmessung hat eine Genauigkeit von ±2 °C.
+**F-SICHERHEITABSCHALTUNG-2**: Das System muss bei geöffneter Abdeckung während des Betriebs innerhalb von 200 ms anhalten.
+**F-SICHERHEITABSCHALTUNG-3**: Das System muss bei Erkennen einer Motorblockade innerhalb von 200 ms abschalten.
+**F-SICHERHEITABSCHALTUNG-4**: Die visuelle Warnung muss durch eine mit 2 Hz blinkende rote LED erfolgen. Der akustische Alarm muss mindestens 70 dB laut sein und mindestens 5 Sekunden andauern.
 
-**F-BENUTZERFEEDBACK-1**: Das System muss für die Betriebszustände (Bereit, In Betrieb, Fehler) eindeutige und unterscheidbare Signale bereitstellen.
+Funktion 5: Benutzerfeedback
+**F-BENUTZERFEEDBACK-1**: Die Betriebszustände müssen eine LED mit verschiedenen Farben (Bereit - Grün,  In Betrieb - Gelb, Fehler - Rot) verwenden.
 **F-BENUTZERFEEDBACK-2**: Die visuelle Anzeige muss aus 5 Metern Entfernung klar erkennbar sein.
 
 
 
 Nicht-funktionale Anforderungen：
 
-**NF-ZEIT-1**: Die Reaktionszeit auf eine kritische Störung muss < 200 ms betragen.
+**NF-ZEIT-1**: Die Reaktionszeit auf Sicherheitsergebnisse (Temperaturüberschreitung, geöffnete Abdeckung, Motorblockade) muss bei 25 °C muss maximal 200 ms betragen.
 **NF-ZEIT-2**: Die Genauigkeit der Zeitsteuerung beim Versiegelungsprozess muss besser als ±50 ms sein.
 
-**NF-BENUTZERFEEDBACK-1**: Der akustische Alarm muss eine Lautstärke von mindestens 70 dB aufweisen.
+**NF-BENUTZERFEEDBACK-1**: Der akustische Alarm muss bei einem Abstand von 1 Meter eine Lautstärke von mindestens 70 dB aufweisen.
 
 **NF-LEISTUNG-1**: Das System muss auch bei Spannungsschwankungen zuverlässig funktionieren.
 
