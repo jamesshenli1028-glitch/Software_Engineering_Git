@@ -42,7 +42,9 @@ Konkrete Verantwortlichkeiten:
 - Gewährleistet die präzise Versiegelungszeit von 2,0 s ±50 ms.
 - Steuert das Heizelement über den MOSFET.
 Schnittstelle:
-- Es wird nur aufgerufen, gibt es kein Parameter oder zurueckgegebener Wert.
+- Es wird aufgerufen.
+  Syntax: Synchroner Funktionsaufruf -> void startSealingProcess(void)
+  Semantik: Der Versiegelungsprozess wird gefuehrt.
 
 ------------------------------------------
 
@@ -69,7 +71,9 @@ Konkrete Verantwortlichkeiten:
 - Steuert den Summer für akustische Alarme (≥70 dB, ≥5 s Dauer).
 - Stellt sicher, dass die Anzeige aus 5 m Entfernung klar erkennbar ist.
 Schnittstelle:
-- Es wird nur aufgerufen, gibt es kein Parameter oder zurueckgegebener Wert.
+- Es wird aufgerufen.
+  Syntax: Synchroner Funktionsaufruf -> void startShowProcess(void)
+  Semantik: Der Anzeigenprozess wird gefuehrt.
 
 ------------------------------------------
 
