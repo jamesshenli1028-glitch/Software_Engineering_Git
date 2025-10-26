@@ -30,7 +30,7 @@ Scnittstelle:
   Syntax: Synchronischer Aufruf. -> float requestPressureReading()
   Semantik: Beim Aufrufen der Funktion wird der aktuelle Druckwert gezeigt.
 - Syntax: Sendet Befehl der Antriebs-Ansteuerung. -> setPumpState(bool enable)
-  Semantik: Wenn das Parameter true ist, wird der Pumpe arbeiten. Wenn es false ist, es wird stoppen.
+  Semantik: Wenn das Parameter true ist, wird die Pumpe arbeiten. Wenn es false ist, wird es stoppen.
 
 ------------------------------------------
 
