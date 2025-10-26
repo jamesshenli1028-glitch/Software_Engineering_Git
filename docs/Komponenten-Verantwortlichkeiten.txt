@@ -7,13 +7,13 @@ Konkrete Verantwortlichkeiten:
 - Initiiert und überwacht den 2-Sekunden-Selbsttest aller kritischer Komponenten.
 Schnittstelle:
 - Vakuum-Regler
-  Syntax: Synchronischer Aufruf und das Geraet wird arbeiten. -> startVacuumProcess()
+  Syntax: Synchronischer Aufruf und das Geraet wird arbeiten. -> startVacuumProcess(void)
   Semantik: Keinem Parameter fuer diese Funktion, initiiert den Vakuumierprozess
 - Versiegelungs-Ablauf
-  Syntax: Synchronischer Aufruf und die Versiegelungsarbeit wird beginnen. -> startSealingProcess()
+  Syntax: Synchronischer Aufruf und die Versiegelungsarbeit wird beginnen. -> startSealingProcess(void)
   Semantik: Keinem Parameter fuer diese Funktion
 - Sicherheits-Wächter
-  Syntax: Asynchronischer Aufruf und Die Alarmfunktion wird aktiviert. -> onSafetyShutdownEvent()
+  Syntax: Asynchronischer Aufruf und Die Alarmfunktion wird aktiviert. -> onSafetyShutdownEvent(void)
   Semantik: Ein Ereignis wird als Parameter gegeben. z.B. UEBER_TEMPERATURE oder BEDECKUNG_OEFFNET. Dann muss das Geraet innerhalb von 200 ms stoppen.
 
 ------------------------------------------
@@ -27,7 +27,7 @@ Konkrete Verantwortlichkeiten：
 - Signalisiert Prozessende an den Prozess-Koordinator.
 Scnittstelle:
 - Abrufen von Daten von Druck-Messkette
-  Syntax: Synchronischer Aufruf. -> float requestPressureReading()
+  Syntax: Synchronischer Aufruf. -> float requestPressureReading(void)
   Semantik: Beim Aufrufen der Funktion wird der aktuelle Druckwert gezeigt.
 - Syntax: Sendet Befehl der Antriebs-Ansteuerung. -> setPumpState(bool enable)
   Semantik: Wenn das Parameter true ist, wird die Pumpe arbeiten. Wenn es false ist, wird es stoppen.
@@ -84,7 +84,7 @@ Konkrete Verantwortlichkeiten:
 - Liefert kalibrierte Druckwerte in mbar.
 - Nutzt DMA für effiziente Datenübertragung mit 10 Hz.
 Schnittstelle:
-- Syntax: Synchronischer Aufruf.  -> float getCurrentPressure()
+- Syntax: Synchronischer Aufruf.  -> float getCurrentPressure(void)
   Semantik: Liefert einen kalibrierten wert, um den aktuellen Ausdruck zu presaentieren.
 
 ------------------------------------------
@@ -95,7 +95,7 @@ Konkrete Verantwortlichkeiten:
 - Erfasst Rohdaten des NTC-Sensors.
 - Liefert kalibrierte Temperaturwerte in °C mit ±2 °C Genauigkeit.
 Schnittstelle:
-- Syntax: Synchronischer Aufruf.  -> float getCurrentTemperatur()
+- Syntax: Synchronischer Aufruf.  -> float getCurrentTemperatur(void)
   Semantik: Liefert einen kalibrierten wert, um den aktuellen Temperatur zu presaentieren.
 
 ------------------------------------------
