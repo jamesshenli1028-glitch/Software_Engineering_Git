@@ -44,7 +44,7 @@ Konkrete Verantwortlichkeiten:
 Schnittstelle:
 - Es wird aufgerufen.
   Syntax: Synchroner Funktionsaufruf -> void startSealingProcess(void)
-  Semantik: Der Versiegelungsprozess wird gefuehrt.
+  Semantik: Der Versiegelungsprozess wird ausgefuehrt.
 
 ------------------------------------------
 
@@ -73,7 +73,7 @@ Konkrete Verantwortlichkeiten:
 Schnittstelle:
 - Es wird aufgerufen.
   Syntax: Synchroner Funktionsaufruf -> void startShowProcess(void)
-  Semantik: Der Anzeigenprozess wird gefuehrt.
+  Semantik: Der Anzeigenprozess wird ausgefuehrt.
 
 ------------------------------------------
 
