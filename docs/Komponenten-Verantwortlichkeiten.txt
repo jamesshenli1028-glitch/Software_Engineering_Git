@@ -1,10 +1,22 @@
 Komponente: Prozess-Koordinator(System Manager)	
 Rolle: Prozesslogik	
-Konkrete Verantwortlichkeiten
+Konkrete Verantwortlichkeiten:
 - Verwaltet die Haupt-Zustandsmaschine des Systems.
 - Koordiniert die Sequenz: Selbsttest → Vakuum → Versiegelung.
 - Verarbeitet Start- und Stop-Befehle.
 - Initiiert und überwacht den 2-Sekunden-Selbsttest aller kritischer Komponenten.
+Schnittstelle:
+- Vakuum-Regler
+  Syntax: Synchronischer Aufruf und das Geraet wird arbeiten. -> startVacuumProcess()
+  Semantik: Keinem Parameter fuer diese Funktion, initiiert den Vakuumierprozess
+- Versiegelungs-Ablauf
+  Syntax: Synchronischer Aufruf und die Versiegelungsarbeit wird beginnen. -> startSealingProcess()
+  Semantik: Keinem Parameter fuer diese Funktion
+- Sicherheits-Wächter
+  Syntax: Asynchronischer Aufruf und Die Alarmfunktion wird aktiviert. -> onSafetyShutdownEvent()
+  Semantik: Ein Ereignis wird als Parameter gegeben. z.B. UEBER_TEMPERATURE oder BEDECKUNG_OEFFNET. Dann muss das Geraet innerhalb von 200 ms stoppen.
+
+------------------------------------------
 
 Komponente: Vakuum-Regler(Vacuum Manager)	
 Rolle: Regelungslogik	
@@ -13,6 +25,14 @@ Konkrete Verantwortlichkeiten：
 - Überwacht den Kammerdruck mit 10 Hz Abtastrate.
 - Beendet den Prozess automatisch bei Erreichen des Zieldrucks (100 mbar ±5 mbar).
 - Signalisiert Prozessende an den Prozess-Koordinator.
+Scnittstelle:
+- Abrufen von Daten von Druck-Messkette
+  Syntax: Synchronischer Aufruf. -> float requestPressureReading()
+  Semantik: Beim Aufrufen der Funktion wird der aktuelle Druckwert gezeigt.
+- Syntax: Sendet Befehl der Antriebs-Ansteuerung. -> setPumpState(bool enable)
+  Semantik: Wenn das Parameter true ist, wird der Pumpe arbeiten. Wenn es false ist, es wird stoppen.
+
+------------------------------------------
 
 Komponente: Versiegelungs-Ablauf(Sealing Manager)	
 Rolle: Ablaufsteuerung	
@@ -21,6 +41,10 @@ Konkrete Verantwortlichkeiten:
 - Startet automatisch innerhalb von 200 ms nach Vakuum-Ende.
 - Gewährleistet die präzise Versiegelungszeit von 2,0 s ±50 ms.
 - Steuert das Heizelement über den MOSFET.
+Schnittstelle:
+- Es wird nur aufgerufen, gibt es kein Parameter oder zurueckgegebener Wert.
+
+------------------------------------------
 
 Komponente: Sicherheits-Wächter(Safety Monitor)	
 Rolle: Sicherheitslogik	
@@ -28,6 +52,15 @@ Konkrete Verantwortlichkeiten:
 - Überwacht kontinuierlich Temperatur (≥80 °C), Abdeckung und Motorstrom.
 - Erkennt kritische Zustände und löst Abschaltung innerhalb von 200 ms aus.
 - Meldet Fehlerzustände an den Prozess-Koordinator und Anzeige-Controller.
+Schnittstelle:
+- Es sendet Alarm dem Prozess-Koordinator zurueck.
+  Syntax: Asychronischer Aufruf. -> triggerEmergencyShutdown(SafetyEvent event)
+  Semantik: Meldet ein kritisches Sicherheitsereignis. Das Ereignis waere: MOTOR_BLOCKED, dann muss das Geraete innerhalb von 200ms stoppen.
+- Es sendet Alarm dem Anzeige-Controller zurueck.
+  Syntax: Asychronischer Aufruf. -> activateAlarm(AlarmType type)
+  Semantik: Parameter `alarm_type` definiert die Alarmart. Es waere ein optischer oder ein akustischer Alarm.
+
+------------------------------------------
 
 Komponente: Anzeige-Controller(UI Manager)	
 Rolle: Benutzerschnittstelle	
@@ -35,6 +68,10 @@ Konkrete Verantwortlichkeiten:
 - Steuert die Status-LEDs (Grün, Gelb, Rot, 2 Hz Blinken).
 - Steuert den Summer für akustische Alarme (≥70 dB, ≥5 s Dauer).
 - Stellt sicher, dass die Anzeige aus 5 m Entfernung klar erkennbar ist.
+Schnittstelle:
+- Es wird nur aufgerufen, gibt es kein Parameter oder zurueckgegebener Wert.
+
+------------------------------------------
 
 Komponente: Druck-Messkette(Pressure Service)	
 Rolle: Messdatenerfassung	
@@ -42,12 +79,22 @@ Konkrete Verantwortlichkeiten:
 - Erfasst Rohdaten des Drucksensors.
 - Liefert kalibrierte Druckwerte in mbar.
 - Nutzt DMA für effiziente Datenübertragung mit 10 Hz.
+Schnittstelle:
+- Syntax: Synchronischer Aufruf.  -> float getCurrentPressure()
+  Semantik: Liefert einen kalibrierten wert, um den aktuellen Ausdruck zu presaentieren.
+
+------------------------------------------
 
 Komponente: Temperatur-Erfasser(Temperature Service)	
 Rolle: Messdatenerfassung	
 Konkrete Verantwortlichkeiten:
 - Erfasst Rohdaten des NTC-Sensors.
 - Liefert kalibrierte Temperaturwerte in °C mit ±2 °C Genauigkeit.
+Schnittstelle:
+- Syntax: Synchronischer Aufruf.  -> float getCurrentTemperatur()
+  Semantik: Liefert einen kalibrierten wert, um den aktuellen Temperatur zu presaentieren.
+
+------------------------------------------
 
 Komponente: Antriebs-Ansteuerung(Motor Service)	
 Rolle: Aktorik	
@@ -55,9 +102,20 @@ Konkrete Verantwortlichkeiten:
 - Schaltet die Vakuumpumpe ein und aus.
 - Schaltet das Heizelement für die Versiegelung ein und aus.
 - Überwacht den Motorstrom zur Blockade-Erkennung.
+Schnittstelle:
+- Vakuumpumpen-Steuerung:
+  Syntax: Synchroner Funktionsaufruf -> void setPumpState(bool state)
+  Semantik: Schaltet die Pumpe ein oder schaltet es aus.
+- Heizelement-Steuerung:
+  Syntax: Synchroner Funktionsaufruf -> void setHeizeState(bool state)
+  Semantik: Schaltet das Heizelement ein oder schaltet es aus.
+
+------------------------------------------
 
 Komponente: Zeitgeber-Basis(Timer Service)	
 Rolle: Zeitbasis	
 Konkrete Verantwortlichkeiten:
 - Stellt eine präzise Zeitbasis für den Versiegelungsprozess bereit (±50 ms).
 - Generiert die 2 Hz Blinkfrequenz für die Status-LED.
+Schnittstelle:
+- Wird vom Prozess-Koordinator aufgerufen.
