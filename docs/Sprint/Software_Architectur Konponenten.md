@@ -1,3 +1,5 @@
+Software-Architektur Komponenten
+
 1. System_Manager (Kernsteuerung)
    - Zustandsmaschine
    - Start/Stop-Steuerung
@@ -23,3 +25,31 @@
 5. Sealing_Manager (Versiegelungssteuerung)
    - Automatische Versiegelung (F-VERSIEGELUNG-1)
    - Versiegelungszeit-Steuerung (F-VERSIEGELUNG-2, NF-ZEIT-2)
+
+
+
+Service Komponenten
+
+1. Pressure_Service (Druckmessung)
+   - Sensor-Datenerfassung
+   - Datenkalibrierung
+   - DMA-Datenübertragung
+   - Druckwert-Bereitstellung
+
+2. Temperature_Service (Temperaturmessung)
+   - NTC-Sensor-Auslesen
+   - Temperaturberechnung
+   - Genauigkeitskontrolle ±2°C
+   - Kalibrierte Temperaturwerte
+
+3. Motor_Service (Aktorik)
+   - Vakuumpumpen-Steuerung
+   - Heizelement-Steuerung
+   - Motorstrom-Überwachung
+   - Blockade-Erkennung
+
+4. Timer_Service (Zeitbasis)
+   - Präzise Zeitmessung
+   - Blinkfrequenz-Generierung (2 Hz)
+   - Prozesszeit-Steuerung
+   - Versiegelungszeit-Kontrolle ±50 ms
