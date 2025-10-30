@@ -13,7 +13,7 @@ Komponente: System_Manager
 Requirement: F-START-3
 Beschreibung: System prüft vor Start alle kritischen Komponenten und meldet Status innerhalb von 2 s
 Priorität: Hoch
-Komponente: System_Manager                  	
+Komponente: System_Manager                   	
 ----------------------------------
 Requirement: F-VAKUUM-1
 Beschreibung: Überwacht Kammerdruck mit 10 Hz Abtastrate
