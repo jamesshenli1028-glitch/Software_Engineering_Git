@@ -53,3 +53,16 @@ Service Komponenten
    - Blinkfrequenz-Generierung (2 Hz)
    - Prozesszeit-Steuerung
    - Versiegelungszeit-Kontrolle ±50 ms
+
+
+Komponenten Interaktion
+1. Datenfluss:
+   - Sensoren → Services → Manager → UI
+      (Pressure/Temp) → (Process) → (Display)
+
+2. Kontrollfluss:
+   - System_Manager → [Vacuum_Manager, Sealing_Manager] → Motor_Service
+
+3. Sicherheitsüberwachung:
+   - Safety_Monitor ← Services → System_Manager → UI_Manager
+      (überwacht)  ←  (Alarm)   →  (Shutdown)   →   (Warnung)
