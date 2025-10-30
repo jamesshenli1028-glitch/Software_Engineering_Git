@@ -1,0 +1,18 @@
+Konfigurationssystem
+├── SystemManager (Kernsteuerung)
+│   ├── Start/Stop Control
+│   ├── Component Checker
+│   └── State Machine
+├── SafetyMonitor (Sicherheit)
+│   ├── Temperature Monitor
+│   ├── Cover Sensor Monitor
+│   ├── Motor Blockage Detector
+│   └── Emergency Shutdown
+├── UIManager (Benutzerschnittstelle)
+│   ├── LED Controller
+│   ├── Buzzer Controller
+│   └── Status Display
+└── Hardware Abstraction
+    ├── GPIO Interface
+    ├── ADC Interface
+    └── Timer Interface
