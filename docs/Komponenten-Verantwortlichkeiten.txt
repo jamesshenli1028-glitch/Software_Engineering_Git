@@ -5,6 +5,7 @@ Konkrete Verantwortlichkeiten:
 - Koordiniert die Sequenz: Selbsttest → Vakuum → Versiegelung.
 - Verarbeitet Start- und Stop-Befehle.
 - Initiiert und überwacht den 2-Sekunden-Selbsttest aller kritischer Komponenten.
+
 Schnittstelle:
 - Vakuum-Regler
   Syntax: Synchronischer Aufruf und das Geraet wird arbeiten. -> startVacuumProcess(void)
@@ -25,7 +26,8 @@ Konkrete Verantwortlichkeiten：
 - Überwacht den Kammerdruck mit 10 Hz Abtastrate.
 - Beendet den Prozess automatisch bei Erreichen des Zieldrucks (100 mbar ±5 mbar).
 - Signalisiert Prozessende an den Prozess-Koordinator.
-Scnittstelle:
+
+Schnittstelle:
 - Abrufen von Daten von Druck-Messkette
   Syntax: Synchronischer Aufruf. -> float requestPressureReading(void)
   Semantik: Beim Aufrufen der Funktion wird der aktuelle Druckwert gezeigt.
@@ -41,6 +43,7 @@ Konkrete Verantwortlichkeiten:
 - Startet automatisch innerhalb von 200 ms nach Vakuum-Ende.
 - Gewährleistet die präzise Versiegelungszeit von 2,0 s ±50 ms.
 - Steuert das Heizelement über den MOSFET.
+
 Schnittstelle:
 - Es wird aufgerufen.
   Syntax: Synchroner Funktionsaufruf -> void startSealingProcess(void)
@@ -54,6 +57,7 @@ Konkrete Verantwortlichkeiten:
 - Überwacht kontinuierlich Temperatur (≥80 °C), Abdeckung und Motorstrom.
 - Erkennt kritische Zustände und löst Abschaltung innerhalb von 200 ms aus.
 - Meldet Fehlerzustände an den Prozess-Koordinator und Anzeige-Controller.
+
 Schnittstelle:
 - Es sendet Alarm dem Prozess-Koordinator zurueck.
   Syntax: Asychronischer Aufruf. -> triggerEmergencyShutdown(SafetyEvent event)
@@ -70,6 +74,7 @@ Konkrete Verantwortlichkeiten:
 - Steuert die Status-LEDs (Grün, Gelb, Rot, 2 Hz Blinken).
 - Steuert den Summer für akustische Alarme (≥70 dB, ≥5 s Dauer).
 - Stellt sicher, dass die Anzeige aus 5 m Entfernung klar erkennbar ist.
+
 Schnittstelle:
 - Es wird aufgerufen.
   Syntax: Synchroner Funktionsaufruf -> void startShowProcess(void)
@@ -83,6 +88,7 @@ Konkrete Verantwortlichkeiten:
 - Erfasst Rohdaten des Drucksensors.
 - Liefert kalibrierte Druckwerte in mbar.
 - Nutzt DMA für effiziente Datenübertragung mit 10 Hz.
+
 Schnittstelle:
 - Syntax: Synchronischer Aufruf.  -> float getCurrentPressure(void)
   Semantik: Liefert einen kalibrierten wert, um den aktuellen Ausdruck zu presaentieren.
@@ -94,6 +100,7 @@ Rolle: Messdatenerfassung
 Konkrete Verantwortlichkeiten:
 - Erfasst Rohdaten des NTC-Sensors.
 - Liefert kalibrierte Temperaturwerte in °C mit ±2 °C Genauigkeit.
+
 Schnittstelle:
 - Syntax: Synchronischer Aufruf.  -> float getCurrentTemperatur(void)
   Semantik: Liefert einen kalibrierten wert, um den aktuellen Temperatur zu presaentieren.
@@ -106,6 +113,7 @@ Konkrete Verantwortlichkeiten:
 - Schaltet die Vakuumpumpe ein und aus.
 - Schaltet das Heizelement für die Versiegelung ein und aus.
 - Überwacht den Motorstrom zur Blockade-Erkennung.
+
 Schnittstelle:
 - Vakuumpumpen-Steuerung:
   Syntax: Synchroner Funktionsaufruf -> void setPumpState(bool state)
@@ -121,5 +129,6 @@ Rolle: Zeitbasis
 Konkrete Verantwortlichkeiten:
 - Stellt eine präzise Zeitbasis für den Versiegelungsprozess bereit (±50 ms).
 - Generiert die 2 Hz Blinkfrequenz für die Status-LED.
+
 Schnittstelle:
 - Wird vom Prozess-Koordinator aufgerufen.
