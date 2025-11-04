@@ -1,60 +1,46 @@
 # SW Design – Klasse / Methoden Beschreibung
 
+System_Manager
 | Methode | Beschreibung | Requirement ID|
 |---------------------|----------------| ----------------|
 | startWorkingCycle() | Startet den Arbeitszyklus | F-START-1 |
-| stopSystem() | Stoppt alle Prozesse | F-START-2 |
+| System_Manager → Vacuum_Manager.stopSystem() | Stoppt alle Prozesse | F-START-2 |
 | checkKomponents() | Prüft kritische Komponenten vor Start | F-START-3 |
-| startVacuum() | Startet Vakuumprozess | F-VAKUUM-3 |
+| System_Manager → Vacuum_Manager.startVakumming() | Startet Vakuumprozess | F-VAKUUM-3 |
+| System_Manager → Sealing_Manager.startSealing() | Initialisiert Versiegelung | F-VERSIEGELUNG-1 |
+
+
+Safety_Monitor
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| temperaturSafety() | Prüft Temperatur | F-SICHERHEIT-1 |
+| abdeckungSafety() | Prüft Abdeckung | F-SICHERHEIT-2 |
+| MotorgSafety() | Prüft Motorblockade | F-SICHERHEIT-3 |
+| emergencyShutdown() | Notabschaltung | NF-ZEIT-1 |
+| activateAlarm() | Akustischer/visueller Alarm | NF-BENUTZER-1, F-SICHERHEIT-4 |
+
+
+UI_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| setLED() | Zeigt Systemzustände an | F-BENUTZER-1 |
+| activateAlarm() | Akustischer Alarm ≥70 dB | NF-BENUTZER-1 |
+| showStatus() | Visuelle Anzeige | F-BENUTZER-2, F-SICHERHEIT-4 |
+
+
+Vacuum_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| getPressure() | Überwacht Kammerdruck | F-VAKUUM-1 |
+| stopVakumming() | Stoppt Vakuumprozess | F-VAKUUM-2 |
+| startVakumming() | Startet Vakuumprozess | F-VAKUUM-3 |
+
+
+Sealing_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
 | startSealing() | Initialisiert Versiegelung | F-VERSIEGELUNG-1 |
-
-2. Safety_Monitor (Sicherheitsüberwachung)
-   - Temperaturüberwachung (F-SICHERHEIT-1)
-   - Abdeckungssensor (F-SICHERHEIT-2)
-   - Motorblockierungserkennung (F-SICHERHEIT-3)
-   - Notabschaltung (NF-ZEIT-1)
-
-3. UI_Manager (Benutzerschnittstelle)
-   - LED-Steuerung (F-BENUTZER-1, F-BENUTZER-2)
-   - Alarmsteuerung (F-SICHERHEIT-4, NF-BENUTZER-1)
-   - Statusanzeige
-
-4. Vacuum_Manager (Vakuumsteuerung)
-   - Kammerdruck-Überwachung (F-VAKUUM-1)
-   - Vakuumieren-Beendigung (F-VAKUUM-2)
-   - Druckmessung mit 10 Hz
-
-5. Sealing_Manager (Versiegelungssteuerung)
-   - Automatische Versiegelung (F-VERSIEGELUNG-1)
-   - Versiegelungszeit-Steuerung (F-VERSIEGELUNG-2, NF-ZEIT-2)
-
-
-
-Service Komponenten
-
-1. Pressure_Service (Druckmessung)
-   - Sensor-Datenerfassung
-   - Datenkalibrierung
-   - DMA-Datenübertragung
-   - Druckwert-Bereitstellung
-
-2. Temperature_Service (Temperaturmessung)
-   - NTC-Sensor-Auslesen
-   - Temperaturberechnung
-   - Genauigkeitskontrolle ±2°C
-   - Kalibrierte Temperaturwerte
-
-3. Motor_Service (Aktorik)
-   - Vakuumpumpen-Steuerung
-   - Heizelement-Steuerung
-   - Motorstrom-Überwachung
-   - Blockade-Erkennung
-
-4. Timer_Service (Zeitbasis)
-   - Präzise Zeitmessung
-   - Blinkfrequenz-Generierung (2 Hz)
-   - Prozesszeit-Steuerung
-   - Versiegelungszeit-Kontrolle ±50 ms
+| controlSealing() | Kontrolliert Versiegelungszeit ±50 ms | F-VERSIEGELUNG-2, NF-ZEIT-2 |
 
 
 Komponenten Interaktion
