@@ -1,10 +1,11 @@
 Software-Architektur Komponenten
 
 1. System_Manager (Kernsteuerung)
-   - Zustandsmaschine
-   - Start/Stop-Steuerung
-   - Komponentenprüfung
-   - Koordination aller Prozesse
+   | startWorkingCycle() | Startet den Arbeitszyklus | F-START-1 |
+   | stopSystem() | Stoppt alle Prozesse | F-START-2 |
+   | checkKomponents() | Prüft kritische Komponenten vor Start | F-START-3 |
+   | startVacuum() | Startet Vakuumprozess | F-VAKUUM-3 |
+   | startSealing() | Initialisiert Versiegelung | F-VERSIEGELUNG-1 |
 
 2. Safety_Monitor (Sicherheitsüberwachung)
    - Temperaturüberwachung (F-SICHERHEIT-1)
