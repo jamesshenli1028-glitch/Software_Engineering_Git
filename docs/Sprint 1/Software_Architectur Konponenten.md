@@ -1,6 +1,6 @@
 # SW Design – Klasse / Methoden Beschreibung
 
-
+| Methode | Beschreibung | Requirement ID|
 |---------------------|----------------| ----------------|
 | startWorkingCycle() | Startet den Arbeitszyklus | F-START-1 |
 | stopSystem() | Stoppt alle Prozesse | F-START-2 |
