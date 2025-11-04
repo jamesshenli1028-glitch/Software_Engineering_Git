@@ -1,5 +1,7 @@
 # SW Design – Klasse / Methoden Beschreibung
 
+
+|---------------------|----------------| ----------------|
 | startWorkingCycle() | Startet den Arbeitszyklus | F-START-1 |
 | stopSystem() | Stoppt alle Prozesse | F-START-2 |
 | checkKomponents() | Prüft kritische Komponenten vor Start | F-START-3 |
