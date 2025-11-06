@@ -12,4 +12,11 @@
 
 ---
 
+## Klassendiagramm
 ![alt text](image.png)
+
+## Sequenzdiagramm
+![alt text](image-2.png)
+
+## Kommunikationsdiagramm
+![alt text](image-1.png)
