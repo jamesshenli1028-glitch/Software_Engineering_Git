@@ -1,0 +1,22 @@
+
+UI_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| setLED() | Zeigt Systemzustände an | F-BENUTZER-1 |
+| activateAlarm() | Akustischer Alarm ≥70 dB | NF-BENUTZER-1 |
+| showStatus() | Visuelle Anzeige | F-BENUTZER-2, F-SICHERHEIT-4 |
+
+
+Vacuum_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| getPressure() | Überwacht Kammerdruck | F-VAKUUM-1 |
+| stopVakumming() | Stoppt Vakuumprozess | F-VAKUUM-2 |
+| startVakumming() | Startet Vakuumprozess | F-VAKUUM-3 |
+
+
+Sealing_Manager
+| Methode | Beschreibung | Requirement ID|
+|---------------------|----------------| ----------------|
+| startSealing() | Initialisiert Versiegelung | F-VERSIEGELUNG-1 |
+| controlSealing() | Kontrolliert Versiegelungszeit ±50 ms | F-VERSIEGELUNG-2, NF-ZEIT-2 |
