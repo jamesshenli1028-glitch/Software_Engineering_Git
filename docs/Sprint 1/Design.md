@@ -1,7 +1,7 @@
 # Sprint 1 Requirements Traceability Matrix
 
 | Requirement ID | Beschreibung | Priorität | Komponente | Begründung | 
-|---------------|--------------|-----------|------------|----------|------------|----------|
+|---------------|--------------|-----------|------------|----------|
 | F-START-1 | System startet Arbeitszyklus nach Drücken der Starttaste | Mittel | System_Manager | Grundfunktionalität | 
 | F-START-2 | System stoppt innerhalb von 100 ms nach Drücken der Stoptaste | Hoch | System_Manager | Sicherheitsrelevantes Stoppen |
 | F-START-3 | System prüft vor Start alle kritischen Komponenten und meldet Status innerhalb von 2 s | Hoch | System_Manager | Vorstart-Sicherheitsprüfung | 
