@@ -5,7 +5,7 @@
 | Methode | Beschreibung | Requirement ID |
 |---------|--------------|----------------|
 | startWorkingCycle() | Startet Arbeitszyklus nach Starttaste | F-START-1 |
-| emergencyStop() | Stoppt System innerhalb von 100ms | F-START-2 |
+| stopSystem() | Stoppt System normal | F-START-2 |
 | checkCriticalComponents() | Prüft Komponenten in <2s | F-START-3 |
 
 # Safety_Monitor
@@ -15,7 +15,7 @@
 | monitorTemperature() | Überwacht kontinuierlich Temperatur (>80°C ±2°C) | F-SICHERHEIT-1 |
 | monitorCover() | Überwacht Abdeckung in Echtzeit | F-SICHERHEIT-2 |
 | monitorMotorBlock() | Erkennt Motorblockaden | F-SICHERHEIT-3 |
-| triggerEmergencyShutdown() | Löst Notabschaltung in ≤200ms aus | NF-ZEIT-1 |
+| emergencyShutdown() | Löst Notabschaltung in ≤200ms aus | NF-ZEIT-1 |
 
 
 
