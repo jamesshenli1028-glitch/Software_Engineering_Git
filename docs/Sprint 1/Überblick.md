@@ -10,14 +10,17 @@ Auswahl der dringendsten Anforderungen – Start/Stop-Tasten, Sicherheitsabschal
 ### Requirements
 Alle kritischen Funktionen auflisten, zugehörige Komponenten (System_Manager, Safety_Monitor, UI_Manager) und Methoden notieren.
 
-Req. F-START-1: Arbeitszyklus starten
-Req. F-START-2: Schnellstopp per Stopptaste
-Req. F-START-3: Vorstart-Komponentenprüfung
-Req. F-SICHERHEIT-1: Übertemperaturabschaltung
-Req. F-SICHERHEIT-2: Stopp bei geöffneter Abdeckung
-Req. F-SICHERHEIT-3: Motorblockadeabschaltung
-Req. NF-ZEIT-1: Begrenzte Reaktionszeit für Sicherheitsereignisse ≤200 ms
+### Sprint 1 – Anforderungen
 
+| Requirement ID | Beschreibung | Komponente |
+|----------------|---------------|-------------|
+| F-START-1 | Arbeitszyklus starten | System_Manager |
+| F-START-2 | Schnellstopp per Stopptaste | System_Manager |
+| F-START-3 | Vorstart-Komponentenprüfung | System_Manager |
+| F-SICHERHEIT-1 | Übertemperaturabschaltung | Safety_Monitor |
+| F-SICHERHEIT-2 | Stopp bei geöffneter Abdeckung | Safety_Monitor |
+| F-SICHERHEIT-3 | Motorblockadeabschaltung | Safety_Monitor |
+| NF-ZEIT-1 | Begrenzte Reaktionszeit für Sicherheitsereignisse ≤200 ms | Safety_Monitor |
 
 ### Design
 Skizze der wichtigsten Klassen und wie sie zusammenarbeiten:  
