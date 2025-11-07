@@ -21,7 +21,7 @@ public:
     {
         if(instance == nullptr)
             instance = new Vakuum_Manager();
-        return instance;S
+        return instance;
     }
 
     void startDevice() override{}
