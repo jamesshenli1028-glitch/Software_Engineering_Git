@@ -29,7 +29,7 @@ public:
 
     void startVakuuming(){ startDevice(); }
     void stopVakuuming(){ stopDevice(); }
-    float monitorPressure(){ return PressureService::getInstance()->getPressure(); } 
+    float monitorPressure(){ return Pressure_Service::getInstance()->getPressure(); } 
     //noch nicht erfuellt werden
 
     void setCurrentPressure(float pressure) { currentPressure = pressure;}
