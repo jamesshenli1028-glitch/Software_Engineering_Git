@@ -7,6 +7,10 @@ class Safety_Monitor
 private:
     static Safety_Monitor* instance;
     Safety_Monitor(){};
+
+    Safety_Monitor(const Safety_Monitor&) = delete;
+    Safety_Monitor& operator=(const Safety_Monitor&) = delete;
+
 public:
     static Safety_Monitor* getInstance()
     {

@@ -1,5 +1,4 @@
 #include "System_Manager.h"
-using namespace std;
 
 System_Manager* System_Manager::instance = nullptr;
 

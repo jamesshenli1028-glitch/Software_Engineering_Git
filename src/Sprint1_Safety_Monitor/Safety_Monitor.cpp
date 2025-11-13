@@ -2,20 +2,18 @@
 
 Safety_Monitor* Safety_Monitor::instance = nullptr;
 
-Safety_Monitor::Safety_Monitor() {}
-
 void Safety_Monitor::monitorTemperature()
 {
-    // TODO: 
+    //will do it in Sprint2
 }
 
 void Safety_Monitor::monitorCover()
 {
-    // TODO:
+    //will do it in Sprint2
 }
 
 void Safety_Monitor::monitorMotorBlock()
 {
-    // TODO:
+    //will do it in Sprint2
 }
 
