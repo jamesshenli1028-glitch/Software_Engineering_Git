@@ -21,8 +21,3 @@ public:
 
 };
 
-Safety_Monitor* Safety_Monitor::instance = nullptr;
-
-void Safety_Monitor::monitorTemperature(){}
-void Safety_Monitor::monitorCover(){}
-void Safety_Monitor::monitorMotorBlock(){}
