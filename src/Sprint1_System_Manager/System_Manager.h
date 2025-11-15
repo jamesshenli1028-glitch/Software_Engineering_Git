@@ -14,6 +14,10 @@ private:
     bool systemRunning;
     bool criticalComponentsOK;
 
+    bool coverOpen = false;       
+    bool motorBlocked = false;    
+    bool overTemperature = false; 
+
 public:
     static System_Manager* getInstance() // Methode fuer das einzige Obj, koette aufgeruft werden
     {
@@ -21,6 +25,12 @@ public:
             instance = new System_Manager();
         return instance;
     }
+
+    bool isCoverOpen() const { return coverOpen; }
+    bool isMotorBlocked() const { return motorBlocked; }
+    bool isOverTemperature() const { return overTemperature; }
+    bool isSystemRunning() const { return systemRunning; }
+    bool areCriticalComponentsOK() const { return criticalComponentsOK; }
 
     void startWorkingCycle(){} // F-START-1
     void stopSystem(){} // F-START-2
