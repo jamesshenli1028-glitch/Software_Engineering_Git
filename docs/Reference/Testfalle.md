@@ -1,4 +1,3 @@
-
 ### Unit Tests
 
 #### UT1 – Start Arbeitszyklus
@@ -7,6 +6,10 @@
 - **Ereignis:** Start-Taste gedrückt  
 - **Eingabe:** `startWorkingCycle()`  
 - **Erwartete Reaktion:** Systemstatus → RUNNING, cycleActive = true  
+- **Testschritte:** 
+1. Rufen Sie startWorkingCycle() auf. 
+2. Überprüfen Sie den neuen Systemstatus. 
+3. Überprüfen Sie den cycleActive-Wert.
 - **Erwarteter Folgezustand:** cycleActive = true, Systemstatus = RUNNING  
 - **Klasse:** System_Manager  
 - **Requirement:** F-START-1  
@@ -17,6 +20,9 @@
 - **Ereignis:** Stop-Taste gedrückt  
 - **Eingabe:** `stopSystem()`  
 - **Erwartete Reaktion:** System stoppt ≤100 ms, cycleActive = false  
+- **Testschritte:** 
+1. Starten Sie eine Zeitmessung.
+2. Rufen Sie stopSystem() auf.
 - **Erwarteter Folgezustand:** cycleActive = false, Systemstatus = STOPPED  
 - **Klasse:** System_Manager  
 - **Requirement:** F-START-2  
@@ -27,6 +33,10 @@
 - **Ereignis:** Vor Start  
 - **Eingabe:** `checkCriticalComponents()`  
 - **Erwartete Reaktion:** Status = OK in ≤2 s  
+- **Testschritte:** 
+1. Rufen Sie checkCriticalComponents() auf.
+2. Überprüfen Sie die Zeitmessung.
+3. Überprüfen Sie den Rückgabestatus (systemCheckPassed).
 - **Erwarteter Folgezustand:** systemCheckPassed = true  
 - **Klasse:** System_Manager  
 - **Requirement:** F-START-3  
@@ -42,6 +52,11 @@
 - **Ereignis:** Temperatur >82 °C  
 - **Eingabe:** `monitorTemperature()`  
 - **Erwartete Reaktion:** Notabschaltung ≤200 ms, Systemstatus = ERROR  
+- **Testschritte:** 
+1. Starten Sie eine Zeitmessung.
+2. Simulieren Sie einen Temperaturwert von >82 °C.
+3. Stoppen Sie die Zeitmessung bei Systemreaktion.
+4. Überprüfen Sie die Zeit und den Systemstatus.
 - **Klasse:** Safety_Monitor  
 - **Requirement:** F-SICHERHEIT-1 / NF-ZEIT-1  
 
@@ -51,6 +66,11 @@
 - **Ereignis:** Abdeckung OFFEN  
 - **Eingabe:** `monitorCover()`  
 - **Erwartete Reaktion:** LED ROT, akustischer Alarm ≥70 dB  
+- **Testschritte:** 
+1. Simulieren Sie das Ereignis "Abdeckung OFFEN".
+2. Überprüfen Sie die LED-Farbe (ROT).
+3. Messen Sie den akustischen Alarm (Dezibel).
+4. Überprüfen Sie den Alarm-Status (≥70 dB).
 - **Klasse:** Safety_Monitor → UI_Manager  
 - **Requirement:** F-SICHERHEIT-2  
 
@@ -60,5 +80,10 @@
 - **Ereignis:** Motorblock / Vakuumende  
 - **Eingabe:** `monitorMotorBlock()`, `startSealing()`  
 - **Erwartete Reaktion:** Notabschaltung bzw. Sealing startet ≤200 ms  
+- **Testschritte:** 
+1. Simulieren Sie das Ereignis "Motorblock".
+2. Überprüfen Sie die Notabschaltung.
+3. Simulieren Sie das Ereignis "Vakuumende".
+4. Überprüfen Sie den Start der Versiegelung.
 - **Klasse:** Safety_Monitor → System_Manager → Sealing_Manager  
 - **Requirement:** F-SICHERHEIT-3 / F-VERSIEGELUNG-1
