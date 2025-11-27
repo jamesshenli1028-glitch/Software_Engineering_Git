@@ -13,6 +13,8 @@
 - **Erwarteter Folgezustand:** cycleActive = true, Systemstatus = RUNNING  
 - **Klasse:** System_Manager  
 - **Requirement:** F-START-1  
+- **Ergebnis:** Der Start wurde korrekt ausgelöst. `cycleActive` wurde auf true gesetzt und der Systemstatus wechselte wie erwartet nach RUNNING.  
+- **Status:** Bestanden 
 
 #### UT2 – Stop System
 - **Ziel:** Sicherstellen, dass das System korrekt stoppt  
@@ -25,7 +27,9 @@
 2. Rufen Sie stopSystem() auf.
 - **Erwarteter Folgezustand:** cycleActive = false, Systemstatus = STOPPED  
 - **Klasse:** System_Manager  
-- **Requirement:** F-START-2  
+- **Requirement:** F-START-2 
+- **Ergebnis:** Das System stoppte innerhalb der geforderten ≤100 ms. `cycleActive` wurde auf false gesetzt und Systemstatus = STOPPED.  
+- **Status:** Bestanden   
 
 #### UT3 – Prüfen kritischer Komponenten
 - **Ziel:** Prüfen, ob `checkCriticalComponents()` korrekt arbeitet  
@@ -39,7 +43,9 @@
 3. Überprüfen Sie den Rückgabestatus (systemCheckPassed).
 - **Erwarteter Folgezustand:** systemCheckPassed = true  
 - **Klasse:** System_Manager  
-- **Requirement:** F-START-3  
+- **Requirement:** F-START-3 
+- **Ergebnis:** Die Methode lieferte innerhalb von ≤2 s einen korrekten OK-Status.  
+- **Status:** Bestanden  
 
 
 ---
@@ -59,6 +65,8 @@
 4. Überprüfen Sie die Zeit und den Systemstatus.
 - **Klasse:** Safety_Monitor  
 - **Requirement:** F-SICHERHEIT-1 / NF-ZEIT-1  
+- **Ergebnis:** Temperaturüberschreitung >82 °C wurde korrekt erkannt. Notabschaltung erfolgte <200 ms, Systemstatus wechselte zu ERROR.  
+- **Status:** Bestanden 
 
 #### IT2 – Abdeckung offen → Alarm
 - **Ziel:** Auslösen eines optischen & akustischen Alarms  
@@ -73,6 +81,8 @@
 4. Überprüfen Sie den Alarm-Status (≥70 dB).
 - **Klasse:** Safety_Monitor → UI_Manager  
 - **Requirement:** F-SICHERHEIT-2  
+- **Ergebnis:** Abdeckung „OFFEN“ wurde korrekt erkannt. Rote LED wurde aktiviert und akustischer Alarm (≥70 dB) wurde ausgelöst.  
+- **Status:** Bestanden 
 
 #### IT3 – Motorblock & Versiegelung
 - **Ziel:** Ereignisbehandlung bei Motorblock bzw. Start der Versiegelung nach Vakuum  
@@ -87,3 +97,5 @@
 4. Überprüfen Sie den Start der Versiegelung.
 - **Klasse:** Safety_Monitor → System_Manager → Sealing_Manager  
 - **Requirement:** F-SICHERHEIT-3 / F-VERSIEGELUNG-1
+- **Ergebnis:** Motorblock wurde korrekt erkannt und Notabschaltung ausgelöst. Beim Szenario „Vakuumende“ startete die Versiegelung innerhalb der geforderten Reaktionszeit.  
+- **Status:** Bestanden  
