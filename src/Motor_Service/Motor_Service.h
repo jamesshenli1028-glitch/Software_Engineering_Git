@@ -3,21 +3,15 @@
 class Motor_Service
 {
 private:
-    bool pumpRunning = false;
-    bool heaterRunning = false;
+    bool pumpRunning;
+    bool heaterRunning;
 
 public:
+    Motor_Service();
 
-    void setPumpe(bool on)
-    {
-        pumpRunning = on;
-    }
+    void setPumpe(bool on);
+    void setHeater(bool on);
 
-    void setHeater(bool on)
-    {
-        heaterRunning = on;
-    }
-
-    bool isPumpRunning() const { return pumpRunning; }
-    bool isHeaterRunning() const { return heaterRunning; }
+    bool isPumpRunning() const;
+    bool isHeaterRunning() const;
 };

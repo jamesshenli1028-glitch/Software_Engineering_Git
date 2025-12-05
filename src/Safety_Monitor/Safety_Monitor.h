@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 // Singleton model
 
@@ -35,7 +34,36 @@ public:
     void monitorTemperature(){} // F-SICHERHEIT-1 
     void monitorCover(){} // F-SICHERHEIT-2 
     void monitorMotorBlock(){} // F-SICHERHEIT-3
-    void emergencyShutdown();
+    void emergencyShutdown(){}
 
 };
 
+
+#pragma once
+
+class Safety_Monitor
+{
+private:
+    bool coverOpen;
+    bool motorBlocked;
+    float temperature;
+
+    Safety_Monitor();
+
+public:
+    static Safety_Monitor* getInstance();
+
+    void updateCoverState(bool v);
+    void updateMotorState(bool v);
+    void updateTemperature(float t);
+
+    bool isCoverOpen() const;
+    bool isMotorBlocked() const;
+    bool isOverTemperature() const;
+
+    void monitorTemperature();
+    void monitorCover();
+    void monitorMotorBlock();
+    void monitorDuringProcess();
+    void emergencyShutdown();
+};

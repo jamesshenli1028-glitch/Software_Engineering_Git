@@ -3,16 +3,13 @@
 class Pressure_Service
 {
 private:
-    float pressure = 1.0f; 
+    float pressure;
+
+    Pressure_Service() : pressure(1.0f) {}
 
 public:
-    float getPressure() const 
-    {
-        return pressure;
-    }
+    static Pressure_Service* getInstance();
 
-    void setPressure(float p)
-    {
-        pressure = p;
-    }
+    float getPressure() const;
+    void setPressure(float p);
 };

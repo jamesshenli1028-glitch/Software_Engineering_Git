@@ -36,7 +36,7 @@ Im Sprint 2 ist das Ziel, die Systemfunktionalität zu erweitern und einen volls
 
 ---
 
-![alt text](image-1.png)
+![alt text](image-5.png)
 
 ## Design
 

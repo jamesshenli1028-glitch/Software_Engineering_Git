@@ -3,16 +3,13 @@
 class Temperature_Service
 {
 private:
-    float currentTemperature = 25.0f; 
+    float currentTemperature;
+
+    Temperature_Service() : currentTemperature(25.0f) {}
 
 public:
-    float getTemperature() const
-    {
-        return currentTemperature;
-    }
+    static Temperature_Service* getInstance();
 
-    void setTemperature(float temp)
-    {
-        currentTemperature = temp;
-    }
+    float getTemperature() const;
+    void setTemperature(float temp);
 };

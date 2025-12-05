@@ -1,45 +1,45 @@
 #include "System_Manager.h"
-#include "Safety_Monitor.h"
+#include <iostream>
 
+System_Manager::System_Manager() : systemRunning(false), criticalComponentsOK(false) {}
 
-System_Manager* System_Manager::instance = nullptr;
+System_Manager* System_Manager::getInstance()
+{
+    static System_Manager instance;
+    return &instance;
+}
 
-void System_Manager::startWorkingCycle() // F-START-1
+void System_Manager::startWorkingCycle()
 {
     std::cout << "[SYSTEM] Starting working cycle.\n";
     systemRunning = true;
     checkCriticalComponents();
-
-    if (!criticalComponentsOK)
-    {
-        std::cout << "[SYSTEM] Start aborted! Critical components not OK.\n";
-        systemRunning = false;
-    }
 }
 
-void System_Manager::stopSystem() // F-START-2
+void System_Manager::stopSystem()
 {
     systemRunning = false;
-    std::cout << "[SYSTEM] System stopped. \n" << std::endl;
+    std::cout << "[SYSTEM] System stopped.\n";
 }
 
-void System_Manager::checkCriticalComponents() // F-START-3
+void System_Manager::checkCriticalComponents()
 {
-    auto safety =  Safety_Monitor::getInstance();
+    auto safety = Safety_Monitor::getInstance();
+    safety->monitorDuringProcess();
 
-    safety->monitorCover();
-    safety->monitorMotorBlock();
-    safety->monitorTemperature();
+    criticalComponentsOK = !safety->isCoverOpen() &&
+                           !safety->isMotorBlocked() &&
+                           !safety->isOverTemperature();
 
-    bool coverOK = !safety->isCoverOpenState();
-    bool motorOK = !safety->isMotorBlockedState();
-    bool temperatureOK= !safety->isOverTempState();
+    std::cout << "[SYSTEM] Critical components "
+              << (criticalComponentsOK ? "OK" : "FAILED") << "\n";
+}
 
-    criticalComponentsOK = coverOK && motorOK && temperatureOK;
-
-    if (criticalComponentsOK)
-        std::cout << "[SYSTEM] Critical components OK.\n";
-    else
-        std::cout << "[SYSTEM] Critical components check FAILED.\n";
-
+bool System_Manager::isSystemRunning() const 
+{ 
+    return systemRunning; 
+}
+bool System_Manager::areCriticalComponentsOK() const 
+{ 
+    return criticalComponentsOK; 
 }

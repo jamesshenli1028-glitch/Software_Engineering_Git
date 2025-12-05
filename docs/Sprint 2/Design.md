@@ -44,9 +44,9 @@ Die Beziehungen zwischen den Klassen zeigen klar die Verantwortlichkeiten:
 
 
 ## 2. Sequenzdiagramm
-![alt text](image-2.png)
+![alt text](image-1.png)
 
-![alt text](image-3.png)
+![alt text](image-2.png)
 ### Beschreibung des Sequenzdiagramms 
 
 Das Sequenzdiagramm beschreibt den vollständigen Ablauf eines Arbeitszyklus im Sprint 2 
@@ -70,9 +70,9 @@ Dieses Diagramm zeigt deutlich:
 
 
 ## 3. Aktivitätsdiagramm
-![alt text](image-5.png)
+![alt text](image-3.png)
 
-![alt text](image-6.png)
+![alt text](image-4.png)
 ### Beschreibung des Aktivitätsdiagramms 
 
 Das Aktivitätsdiagramm zeigt den systematischen Ablauf eines kompletten Arbeitszyklus im Sprint 2. Dieser Ablauf umfasst:
