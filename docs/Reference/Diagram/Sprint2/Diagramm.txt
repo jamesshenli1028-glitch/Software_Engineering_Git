@@ -1,0 +1,139 @@
+Klassen-Diagramm
+
+```mermaid
+classDiagram
+    class SystemManager {
+        +startWorkingCycle()
+        +stopSystem()
+        +checkCriticalComponents() : bool
+        +systemStatus : Status
+        +cycleActive : bool
+    }
+
+    class SafetyMonitor {
+        +monitorTemperature()
+        +monitorCover()
+        +monitorMotorBlock()
+        +notifyError()
+        +temperatureThreshold : float
+    }
+
+    class UIManager {
+        +updateLED(color)
+        +playAlarm(volume)
+        +displayStatus(msg)
+    }
+
+    class VacuumManager {
+        +startVacuum()
+        +stopVacuum()
+        +vacuumPressure : float
+    }
+
+    class SealingManager {
+        +startSealing()
+        +stopSealing()
+    }
+
+    SystemManager --> SafetyMonitor : uses
+    SystemManager --> VacuumManager : controls
+    SystemManager --> SealingManager : controls
+    SafetyMonitor --> UIManager : triggers alarm
+
+
+Use-Case Diagram
+
+flowchart TD
+    User([Benutzer])
+    SM([System Manager])
+    SAF([Safety Monitor])
+    UI([UI Manager])
+    VAC([Vacuum Manager])
+    SEA([Sealing Manager])
+
+    User --> |"Start drücken"| SM
+    User --> |"Stop drücken"| SM
+
+    SM --> |"Arbeitszyklus starten"| VAC
+    VAC --> |"Vakuumende"| SEA
+
+    SAF --> |"Temperatur >82°C"| SM
+    SAF --> |"Abdeckung offen"| UI
+    SAF --> |"Motorblock"| SM
+
+    UI --> |"LED Rot + Alarm"| User
+
+
+Aktivitätsdiagramm – Start/Stop
+
+flowchart TD
+    Start([Start Working Cycle])
+    Check[Check Critical Components]
+    OK{Components OK?}
+    Run([Set status RUNNING])
+    Vac([Start Vacuum])
+    Seal([Start Sealing])
+    End([Cycle Finished])
+
+    Start --> Check
+    Check --> OK
+    OK -->|yes| Run
+    Run --> Vac
+    Vac --> Seal
+    Seal --> End
+
+    OK -->|no| Error([ERROR + Stop])
+
+
+Aktivitätsdiagramm – Safety Monitoring
+
+flowchart TD
+    A([Monitor Loop])
+    T{Temp >82°C?}
+    C{Cover open?}
+    M{Motor block?}
+
+    A --> T
+    T -->|yes| Shutdown([Notabschaltung + ERROR])
+    T -->|no| C
+    C -->|yes| Alarm([LED Rot + >70dB Alarm])
+    C -->|no| M
+    M -->|yes| Shutdown
+    M -->|no| A
+
+
+Sequenzdiagramm – Temperatur-Notabschaltung
+
+sequenceDiagram
+    participant SAF as SafetyMonitor
+    participant SM as SystemManager
+    participant UI as UIManager
+
+    SAF->>SAF: measureTemperature()
+    SAF->>SM: notifyError(Temperature High)
+    SM->>SM: stopSystem()
+    SM->>UI: displayStatus(ERROR)
+    UI->>UI: activateRedLED()
+
+
+Sequenzdiagramm – Vakuum → Versiegelung
+
+sequenceDiagram
+    participant SM as SystemManager
+    participant VAC as VacuumManager
+    participant SEA as SealingManager
+
+    SM->>VAC: startVacuum()
+    VAC-->>SM: vacuumEnded()
+    SM->>SEA: startSealing()
+    SEA-->>SM: sealingCompleted()
+
+
+SystemStatus
+
+stateDiagram-v2
+    [*] --> READY
+    READY --> RUNNING : startWorkingCycle()
+    RUNNING --> STOPPED : stopSystem()
+    RUNNING --> ERROR : SafetyMonitor triggers
+    ERROR --> READY : reset()
