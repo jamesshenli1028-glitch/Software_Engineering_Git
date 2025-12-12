@@ -40,3 +40,57 @@ Sealing_Manager
 | monitorCover() | Überwacht Abdeckung in Echtzeit | F-SICHERHEIT-2 | Überprüft Abdeckung in Echtzeit; aktiviert Alarm bei Offen | IT2 | Integration | ✘ Fehlverhalten | LED verzögert, Alarm nicht sofort |
 | monitorMotorBlock() | Erkennt Motorblockaden | F-SICHERHEIT-3 | Erkennt Motorblockaden; triggert emergencyShutdown() | IT3 | Integration | ✔ Bestanden | Motorblock korrekt erkannt |
 | emergencyShutdown() | Löst Notabschaltung in ≤200ms aus | NF-ZEIT-1 | Gewährleistet Abschaltzeit ≤200ms | IT1, IT2, IT3 | Integration | ✔ / ✘ | Zeitkritische Notabschaltungen geprüft |
+
+
+
+
+# Traceability Matrix – Sprint 2
+
+| Requirement ID | Beschreibung | Komponente | Priorität | Begründung | Schnittstelle | Sprint 2 | Architektur | Methode(n) | Testfall(e) |
+|----------------|--------------|------------|-----------|------------|---------------|----------|-------------|------------|-------------|
+| F-VACUUM-1 | Startet Vakuumprozess | VacuumManager | Hoch | Kernfunktion für Verpackung | VacuumManager.startVacuum() | JA | Application | startVacuum() | UT4 |
+| F-VACUUM-2 | Überwacht Drucksensor während Vakuum | VacuumManager | Hoch | Sicherheit und Prozesskontrolle | VacuumManager.monitorPressure() | JA | Application | monitorPressure() | UT5 |
+| F-VACUUM-3 | Beendet Vakuum bei Zielunterdruck | VacuumManager | Hoch | Automatischer Prozessabschluss | VacuumManager.isTargetPressureReached() | JA | Application | isTargetPressureReached() | UT5 |
+| F-VACUUM-4 | Benachrichtigung SystemManager nach Vakuumende | VacuumManager → SystemManager | Hoch | Prozesskoordination | VacuumManager.notifyVacuumDone() / SystemManager.handleVacuumDone() | JA | Application | notifyVacuumDone(), handleVacuumDone() | IT4 |
+| F-SEAL-1 | Startet Versiegelung nach Vakuum | SystemManager → SealingManager | Hoch | Abhängig von Vakuum | SystemManager.startSealingProcess() | JA | Application | startSealingProcess() | IT4 |
+| F-SEAL-2 | Versiegelungszeit 2,0 s ±50 ms | SealingManager | Hoch | Prozessgenauigkeit | SealingManager.controlSealing() | JA | Application | controlSealing() | UT7 |
+| F-SEAL-3 | Benachrichtigung SystemManager nach Versiegelung | SealingManager → SystemManager | Hoch | Prozesskoordination | SealingManager.notifySealingDone() / SystemManager.handleSealingDone() | JA | Application | notifySealingDone(), handleSealingDone() | IT5 |
+| F-TIMER-1 | Timer für zeitkritische Vorgänge | TimerService | Mittel | Steuerung von Verzögerungen | TimerService.startTimer() | JA | Timing | startTimer() | UT6 |
+| F-TIMER-2 | Timer-Callback Ereignis | TimerService | Mittel | Steuerung von Prozessen | TimerService.onTimeout() | JA | Timing | onTimeout() | UT6 |
+| F-SAFETY-4 | Sicherheitsüberwachung während Vakuum/Sealing | SafetyMonitor | Kritisch | Vermeidung von Schäden | SafetyMonitor.monitorDuringProcess() | JA | Safety | monitorDuringProcess() | IT5 |
+| F-SAFETY-5 | Notabschaltung ≤200 ms möglich | SafetyMonitor | Kritisch | Kritische Sicherheitsfunktion | SafetyMonitor.emergencyShutdown() | JA | Safety | emergencyShutdown() | IT5 |
+| F-UI-2 | Anzeige Vakuum- und Sealingstatus | UIManager | Mittel | Prozessvisualisierung | UIManager.showVacuumStatus(), UIManager.showSealingStatus() | JA | Presentation | showVacuumStatus(), showSealingStatus() | IT4 |
+| NF-ZEIT-2 | Timer/Versiegelungsgenauigkeit ±10 ms / ±50 ms | TimerService / SealingManager | Hoch | Prozessgenauigkeit | TimerService.getTimestamp(), SealingManager.controlSealing() | JA | Timing / Application | getTimestamp(), controlSealing() | UT8 |
+| NF-ARCH-1 | Asynchrone Architektur für Vakuum/Sealing/Safety | SystemManager, VacuumManager, SealingManager | Hoch | Unterstützt parallele Abläufe | Thread-Lifecycle-Management | JA | System | Thread-Lifecycle-Management | Review |
+
+
+
+
+
+# Traceability Matrix
+
+
+| Requirement ID | Beschreibung | Komponente | Priorität | Begründung | Schnittstelle | Sprint 1 | Architektur | Methode(n) | Testfall(e) |
+|----------------|--------------|------------|-----------|------------|--------|----------|-------------|------------|-------------|
+| F-START-1 | System startet Arbeitszyklus nach Drücken der Starttaste | System_Manager | Mittel | Grundfunktionalität | System_Manager.startWorkingCycle() | JA | Core / Logic | startWorkingCycle() | UT1 |
+| F-START-2 | System stoppt innerhalb von 100 ms nach Drücken der Stoptaste | System_Manager | Hoch | Sicherheitsrelevantes Stoppen | System_Manager.stopSystem() | JA | Core / Logic | stopSystem() | UT2 |
+| F-START-3 | System prüft vor Start alle kritischen Komponenten und meldet Status innerhalb von 2 s | System_Manager | Hoch | Vorstart-Sicherheitsprüfung | System_Manager.checkKomponents() | JA | Core / Logic | checkCriticalComponents() | UT3 |
+| F-SICHERHEIT-1 | Abschaltung bei >80 °C (±2 °C Genauigkeit) | Safety_Monitor | Kritisch | Kritische Sicherheitsfunktion | Safety_Monitor.temperaturSafety() | JA | Safety | monitorTemperature() | IT1 |
+| F-SICHERHEIT-2 | Stoppt innerhalb von 200 ms bei geöffneter Abdeckung | Safety_Monitor | Kritisch | Kritische Sicherheitsfunktion | Safety_Monitor.abdeckungSafety() | JA | Safety | monitorCover() | IT2 |
+| F-SICHERHEIT-3 | Abschaltung innerhalb von 200 ms bei Motorblockade | Safety_Monitor | Kritisch | Kritische Sicherheitsfunktion | Safety_Monitor.emergencyShutdown() | JA | Safety | monitorMotorBlock() | IT3 |
+| F-SICHERHEIT-4 | Visuelle + akustische Warnung | UI_Manager | Hoch | Sicherheitsfeedback | UI_Manager.startShowProcess() |  |  |  |  |
+| F-BENUTZER-1 | Zustände: Bereit (Grün), In Betrieb (Gelb), Fehler (Rot) | UI_Manager | Mittel | Grundstatus-Anzeige | UI_Manager.setLED() |  |  |  |  |
+| NF-ZEIT-1 | Reaktionszeit auf Sicherheitsereignisse ≤200 ms bei 25°C | Safety_Monitor | Kritisch | Zeitkritisches Safety | Timer_Service.getTime() | JA | Safety / Timing | emergencyShutdown() | IT1 |
+| NF-BENUTZER-1 | Akustischer Alarm ≥70 dB in 1 m Entfernung | UI_Manager | Mittel | Sicherheitsalarm | UI_Manager.activateAlarm() |  |  |  |  |
+| NF-LEISTUNG-1 | Funktion auch bei Spannungsschwankungen | System_Manager | Hoch | Robustheitsanforderung | implemented via System_Manager internal monitoring / Watchdog |  |  |  |  |
+| F-VAKUUM-1 | Überwacht Kammerdruck mit 10 Hz Abtastrate | Vacuum_Manager | Mittel | Nach Safety in Sprint 2 | Vakuum_Manager.monitorPressure() |  |  |  |  |
+| F-VAKUUM-2 | Beendet Vakuumieren bei 100 mbar ±5 mbar | Vacuum_Manager | Hoch | Nach Safety in Sprint 2 | Vakuum_Manager.stopVakumming() |  |  |  |  |
+| F-VAKUUM-3 | Beginnt Versiegelung innerhalb von 200 ms nach Vakuumende | System_Manager | Hoch | Abhängig von Vakuum | Vakuum_Manager.startVakumming() |  |  |  |  |
+| F-VERSIEGELUNG-1 | Versiegelt Beutel automatisch nach Vakuumieren | Sealing_Manager | Hoch | Abhängig von Vakuum | Sealing_Manager.startSeeling() |  |  |  |  |
+| F-VERSIEGELUNG-2 | Versiegelungszeit: 2,0 s ±50 ms | Sealing_Manager | Hoch | Abhängig von Vakuum | Sealing_Manager.controlSealing() |  |  |  |  |
+| F-BENUTZER-2 | Visuelle Anzeige aus 5 m Entfernung klar erkennbar | UI_Manager | Mittel | UI-Optimierung später | UI_Manager.startShowProcess() |  |  |  |  |
+| NF-ZEIT-2 | Genauigkeit Versiegelungszeit ±50 ms | Sealing_Manager | Hoch | Abhängig von Sealing | Sealing_Manager.start() / control() |  |  |  |  |
+
+
+
+---
