@@ -12,8 +12,17 @@ System_Manager* System_Manager::getInstance()
 void System_Manager::startWorkingCycle()
 {
     std::cout << "[SYSTEM] Starting working cycle.\n";
-    systemRunning = true;
+
     checkCriticalComponents();
+
+    if(!criticalComponentsOK)
+    {
+        std::cout << "[SYSTEM] ERROR: Cannot start. Critical components NOT OK.\n";
+        systemRunning = false;
+        return;
+    }
+
+    systemRunning = true;
 }
 
 void System_Manager::stopSystem()
@@ -43,3 +52,8 @@ bool System_Manager::areCriticalComponentsOK() const
 { 
     return criticalComponentsOK; 
 }
+
+
+
+
+

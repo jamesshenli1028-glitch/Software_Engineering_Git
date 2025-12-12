@@ -1,7 +1,14 @@
 #include "Motor_Service.h"
 #include <iostream>
 
-Motor_Service::Motor_Service() : pumpRunning(false), heaterRunning(false) {}
+Motor_Service::Motor_Service() :
+    pumpRunning(false), heaterRunning(false) {}
+
+Motor_Service* Motor_Service::getInstance()
+{
+    static Motor_Service instance;
+    return &instance;
+}
 
 void Motor_Service::setPumpe(bool on)
 {

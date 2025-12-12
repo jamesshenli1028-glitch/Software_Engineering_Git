@@ -6,8 +6,10 @@ private:
     bool pumpRunning;
     bool heaterRunning;
 
-public:
     Motor_Service();
+
+public:
+    static Motor_Service* getInstance();
 
     void setPumpe(bool on);
     void setHeater(bool on);
